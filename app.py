@@ -16,13 +16,15 @@ import streamlit as st
 
 st.title("Expense Tracker")
 st.write("Upload a file:")
-uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+uf = st.file_uploader("Choose a CSV file", type="csv")
 
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+if uf is not None:
+    df = pd.read_csv(uf)
     st.dataframe(df)
     st.write("--------Total Expenses--------")
     st.write(df)
     category = df.groupby('Category')['Amount'].sum()
     st.write("--------Total by Category--------")
     st.write(category)
+else:
+    st.info("Please upload a CSV file to see the data.")
